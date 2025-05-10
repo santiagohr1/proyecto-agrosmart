@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="es" xmlns="https://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AgroSmart - Dashboard</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="logo-container">
+                <img src="../img/logo.png" alt="AgroSmart Logo" class="logo">
+                <h1>AgroSmart</h1>
+            </div>
+            
+            <nav class="sidebar-nav">
+                <ul>
+                    <li class="active"><a href="dashboard.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+                    <li><a href="parcelas.html"><i class="fas fa-map-marked-alt"></i> Mis Parcelas</a></li>
+                    <li><a href="cultivos.html"><i class="fas fa-seedling"></i> Planificación de Cultivos</a></li>
+                    <li><a href="insumos.html"><i class="fas fa-tractor"></i> Insumos Agrícolas</a></li>
+                    <li><a href="progreso.html"><i class="fas fa-chart-line"></i> Progreso de Cultivos</a></li>
+                    <li id="adminMenu" style="display: none;"><a href="usuarios.html"><i class="fas fa-users-cog"></i> Gestión de Usuarios</a></li>
+                </ul>
+            </nav>
+            
+            <div class="user-profile">
+                <div class="user-avatar">
+                    <i class="fas fa-user-circle"></i>
+                </div>
+                <div class="user-info">
+                    <span class="user-name" id="userName">Nombre Usuario</span>
+                    <span class="user-role" id="userRole">Agricultor</span>
+                </div>
+                <button id="logoutBtn" class="btn-logout"><i class="fas fa-sign-out-alt"></i></button>
+            </div>
+        </aside>
+        
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="main-header">
+                <h2>Dashboard</h2>
+                <div class="header-actions">
+                    <div class="search-box">
+                        <input type="text" placeholder="Buscar...">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <div class="notifications">
+                        <i class="fas fa-bell"></i>
+                        <span class="notification-badge">3</span>
+                    </div>
+                </div>
+            </header>
+            
+            <div class="content">
+                <!-- Widgets -->
+                <div class="widgets-row">
+                    <div class="widget">
+                        <div class="widget-icon bg-primary">
+                            <i class="fas fa-map-marked-alt"></i>
+                        </div>
+                        <div class="widget-info">
+                            <h3>Parcelas</h3>
+                            <p id="parcelasCount">5</p>
+                        </div>
+                    </div>
+                    
+                    <div class="widget">
+                        <div class="widget-icon bg-success">
+                            <i class="fas fa-seedling"></i>
+                        </div>
+                        <div class="widget-info">
+                            <h3>Cultivos Activos</h3>
+                            <p id="cultivosCount">3</p>
+                        </div>
+                    </div>
+                    
+                    <div class="widget">
+                        <div class="widget-icon bg-warning">
+                            <i class="fas fa-calendar-day"></i>
+                        </div>
+                        <div class="widget-info">
+                            <h3>Próximas Tareas</h3>
+                            <p id="tareasCount">2</p>
+                        </div>
+                    </div>
+                    
+                    <div class="widget">
+                        <div class="widget-icon bg-danger">
+                            <i class="fas fa-chart-pie"></i>
+                        </div>
+                        <div class="widget-info">
+                            <h3>Rendimiento</h3>
+                            <p id="rendimientoCount">85%</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Gráficos y Tablas -->
+                <div class="charts-row">
+                    <div class="chart-container">
+                        <h3>Progreso de Cultivos</h3>
+                        <canvas id="cultivosChart"></canvas>
+                    </div>
+                    
+                    <div class="chart-container">
+                        <h3>Actividad Reciente</h3>
+                        <div class="activity-list">
+                            <div class="activity-item">
+                                <div class="activity-icon">
+                                    <i class="fas fa-seedling"></i>
+                                </div>
+                                <div class="activity-content">
+                                    <p>Nuevo cultivo iniciado en Parcela Norte</p>
+                                    <small>Hace 2 horas</small>
+                                </div>
+                            </div>
+                            <div class="activity-item">
+                                <div class="activity-icon">
+                                    <i class="fas fa-tint"></i>
+                                </div>
+                                <div class="activity-content">
+                                    <p>Riego completado en Parcela Sur</p>
+                                    <small>Hace 5 horas</small>
+                                </div>
+                            </div>
+                            <div class="activity-item">
+                                <div class="activity-icon">
+                                    <i class="fas fa-shopping-basket"></i>
+                                </div>
+                                <div class="activity-content">
+                                    <p>Nuevos insumos registrados</p>
+                                    <small>Ayer</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Tabla de Cultivos Activos -->
+                <div class="table-container">
+                    <h3>Cultivos Activos</h3>
+                    <table id="cultivosTable">
+                        <thead>
+                            <tr>
+                                <th>Parcela</th>
+                                <th>Tipo de Cultivo</th>
+                                <th>Fecha Inicio</th>
+                                <th>Etapa Actual</th>
+                                <th>Progreso</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Parcela Norte</td>
+                                <td>Maíz</td>
+                                <td>15/05/2023</td>
+                                <td>Crecimiento</td>
+                                <td>
+                                    <div class="progress-bar">
+                                        <div class="progress" style="width: 65%;"></div>
+                                    </div>
+                                    <span>65%</span>
+                                </td>
+                                <td>
+                                    <button class="btn-action"><i class="fas fa-eye"></i></button>
+                                    <button class="btn-action"><i class="fas fa-edit"></i></button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Parcela Sur</td>
+                                <td>Frijol</td>
+                                <td>20/05/2023</td>
+                                <td>Germinación</td>
+                                <td>
+                                    <div class="progress-bar">
+                                        <div class="progress" style="width: 30%;"></div>
+                                    </div>
+                                    <span>30%</span>
+                                </td>
+                                <td>
+                                    <button class="btn-action"><i class="fas fa-eye"></i></button>
+                                    <button class="btn-action"><i class="fas fa-edit"></i></button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="js/dashboard.js"></script>
+</body>
+</html>
