@@ -1,13 +1,13 @@
-package com.projectofinalconfig.spring.springboot_web1;
+package com.projectfinalconfig.spring.agrosmart;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class SpringbootWeb1Application {
+public class AgrosmartApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(SpringbootWeb1Application.class, args);
+		SpringApplication.run(AgrosmartApplication.class, args);
 	}
 
-}
+} 
